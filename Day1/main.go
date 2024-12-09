@@ -23,6 +23,16 @@ func Abs(n int) int {
     return -n
 }
 
+func Frequency(right []int, num int) int {
+	c := 0
+	for _, item := range right {
+		if item == num {
+			c++
+		}
+	} 
+	return c
+}
+
 func main() {
 	flag.Parse()
 	left, right := utils.ReadFile(*filename)
@@ -32,8 +42,13 @@ func main() {
 	sort.Ints(right)
 	sum := 0
 	for i := 0; i < len(left); i++ {
-		distance := left[i] - right[i]
-		sum = sum + Abs(distance)
+		sum += Abs(left[i] - right[i])
 	}
-	fmt.Println(sum)
+	fmt.Println("Distance is:",sum)
+	// part II
+	ss := 0
+	for i := 0; i < len(left); i++ {
+		ss += left[i] * Frequency(right,left[i])
+	}
+	fmt.Println("Similarty Score is",ss)
 }
