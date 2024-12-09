@@ -42,7 +42,7 @@ func ReadFile(filename string) ([]int, []int) {
 	return left, right
 }
 
-func ClearString(input *bufio.scanner) string{
+func ClearString(input *bufio.Scanner) string{
 	str := input.Text()
 	str = strings.ReplaceAll(str, "\r", "")
 	str = strings.ReplaceAll(str, "\n", "")
@@ -51,18 +51,18 @@ func ClearString(input *bufio.scanner) string{
 	return str
 }
 
-func StringArray(input *bufio.scanner) []string {
+func StringArray(input *bufio.Scanner) []string {
 	line := ClearString(input)
-	nums := strings.split(line, "   ")
+	nums := strings.Split(line, "   ")
 	return nums
 }
 
-func IntArray(input *bufio.scanner) []int {
+func IntArray(input *bufio.Scanner) []int {
 	nums := StringArray(input)
 	array := make([]int, 0)
 	for _, n := range nums {
 		value, _ := strconv.Atoi(n)
-		array := append(array, value)
+		array = append(array, value)
 	}
 	return array
 }
