@@ -4,10 +4,11 @@ import (
 	"github.com/chxmxii/aoc-d1/utils"
 	"fmt"
 	"sort"
+	"flag"
 )
 
 var (
-	filename =  "input.txt"
+	filename =  flag.String("f","input.txt","input file")
 ) 
 func check(e error) {
 	if e != nil {
@@ -23,7 +24,8 @@ func Abs(n int) int {
 }
 
 func main() {
-	left, right := utils.ReadFile(filename)
+	flag.Parse()
+	left, right := utils.ReadFile(*filename)
 	// left := []int{3,4,2,1,3,3}
 	// right := []int{4,3,5,3,9,3}
 	sort.Ints(left)
