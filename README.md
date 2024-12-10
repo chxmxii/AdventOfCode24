@@ -9,3 +9,6 @@ My solutions for Advent of code 2k24 in golang.
 - Day 2 ;
     - https://pkg.go.dev/embed
     - https://pkg.go.dev/strings#Fields
+- Day 3;
+    - https://regex101.com/
+    - https://golang-nuts.narkive.com/Xf7QgESS/hot-to-implement-a-runtime-defined-function-evaluation
