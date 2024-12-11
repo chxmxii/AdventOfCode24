@@ -19,15 +19,28 @@ func main() {
 		panic("empty input!!!")
 	}
 	sum := 0
+	sum2 := 0
+	do := true
 	data := clearString(input)
 	for _, d := range data {
-		sum += mul(d)
+		if strings.Compare("do()",d) == 0 {
+			do = true
+		} else if strings.Compare("don't()",d) == 0 {
+			do = false
+		} else {
+			sum += mul(d)
+			if do {
+				sum2 += mul(d)
+			}
+		}
 	}
 	fmt.Println("sum of multiplication is", sum)
+	fmt.Println("sum of multiplication is", sum2)
+
 }
 
 func clearString(input string) []string {
-	data := regexp.MustCompile(`mul\([\d]{1,3},[\d]{1,3}\)`).FindAllString(input,-1)
+	data := regexp.MustCompile(`mul\(\d+,\d+\)|do\(\)|don't\(\)`).FindAllString(input,-1)
 	return data 
 }
 
