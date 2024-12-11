@@ -21,9 +21,9 @@ func main() {
 	sum := 0
 	data := clearString(input)
 	for _, d := range data {
-		sum += getNums(d)
+		sum += mul(d)
 	}
-	fmt.Println(sum)
+	fmt.Println("sum of multiplication is", sum)
 }
 
 func clearString(input string) []string {
@@ -31,7 +31,7 @@ func clearString(input string) []string {
 	return data 
 }
 
-func getNums(input string) int {
+func mul(input string) int {
 	nums := make([]int, 0)
 	values := regexp.MustCompile(`\d+`).FindAllString(input,-1)
 	for _, v := range values {
@@ -42,9 +42,5 @@ func getNums(input string) int {
 		}
 		nums = append(nums,num)
 	} 
-	return mul(nums[0],nums[1])
-}
-
-func mul(x,y int) int {
-	return x*y
+	return nums[0] * nums[1]
 }
