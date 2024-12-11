@@ -5,3 +5,7 @@ day1:
 .PHONY: day2
 day2:
 	@./Day2/day2
+
+.PHONY: day3
+day3:
+	@./Day3/day3

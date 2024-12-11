@@ -35,7 +35,7 @@ func main() {
 		}
 	}
 	fmt.Println("sum of multiplication is", sum)
-	fmt.Println("sum of multiplication is", sum2)
+	fmt.Println("sum of multiplication without don't", sum2)
 
 }
 
