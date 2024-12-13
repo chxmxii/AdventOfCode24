@@ -7,11 +7,17 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func Test(t *Testing.T)
-	t.Run("",func(t *Testing.T)) {
-		//assert.Equal(t, #input, func, msg )
-		input := "test"
+func TestSolve(t *testing.T) {
+	t.Run("", func(t *testing.T) {
+		// Testing input data
+		input := "test_input.txt"
 		data, err := getInput(input)
-		assert.Nil(t, err)
-		require.Nil(t, err)
-	}
+
+		assert.Nil(t, err, "Passed")
+		require.Nil(t, err, "Required")
+		assert.NotEmpty(t, data, "Should not be empty")
+
+		// searching word
+		assert.Equal(t, )
+	})
+}
