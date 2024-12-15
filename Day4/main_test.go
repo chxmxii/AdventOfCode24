@@ -16,8 +16,15 @@ func TestSolve(t *testing.T) {
 		assert.Nil(t, err, "Passed")
 		require.Nil(t, err, "Required")
 		assert.NotEmpty(t, data, "Should not be empty")
-
-		// searching word
-		assert.Equal(t, )
+		gridInput := "MMMSXXMASM\nMSAMXMSMSA"
+		expectedGrid := [][]string{
+			{"M","M","M","S","X","X","M","A","S","M"},
+			{"M","S","A","M","X","M","S","M","S","A"},
+		}
+		// Check if the createdGrid
+		assert.Equal(t,expectedGrid ,createGrid(gridInput), "failed to create grid" )
+		// find word occurrences
+		grid := createGrid(data)
+		assert.Equal(t, 18, searchWord(grid, "XMAS"), "failed to get the correct num of words")
 	})
 }
