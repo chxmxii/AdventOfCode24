@@ -26,5 +26,6 @@ func TestSolve(t *testing.T) {
 		// find word occurrences
 		grid := createGrid(data)
 		assert.Equal(t, 18, searchWord(grid, "XMAS"), "failed to get the correct num of words")
+		assert.Equal(t, 9, crossSearchWord(grid, "MAS"), "failed to get the correct num of cross words")
 	})
 }

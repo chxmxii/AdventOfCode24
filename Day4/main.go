@@ -19,6 +19,12 @@ var directions = [8][2]int{
 	{0, 1}, // right
 }
 
+var crossDirections = [4][2]int {
+	{-1, -1}, // up left
+	{-1, 1}, // up right
+	{1, 1}, // down right
+	{1, -1}, // down left
+}
 func getInput(filename string) (string, error) {
 	bytes, err := os.ReadFile(filename)
 	if err != nil {
@@ -78,6 +84,40 @@ func searchWord(grid [][]string, word string) int {
 	return ans
 }
 
+func crossSearchWord(grid [][]string, word string) int {
+	rows := len(grid)
+	if rows == 0 {
+		return 0
+	}
+	cols := len(grid[0])
+	// fmt.Println(cols)
+	ans := 0
+	for r := 0; r < rows; r++ {
+		for c := 0; c < cols; c++ {
+			if grid[r][c] == string(word[1]) {
+				for _, d := range crossDirections {
+					found := true
+					for i := 0; i < len(word); i++ {
+						nr := r + i*d[0]
+						nc := c + i*d[1]
+						if grid[nr][nc] == ["M","S"] || grid[nr][nc] == ["S","M"] {
+							ans++
+						}
+						// if nr < 0 || nr < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
+						// 	found = false
+						// 	break
+						}
+					}
+					if !found {
+						break
+					}
+				}
+			}
+		}
+	}
+	return ans
+}
+
 func handleError(err error) {
 	if err != nil {
 		panic(err)
@@ -89,6 +129,8 @@ func main() {
 	handleError(err)
 
 	grid := createGrid(data)
-	ans := searchWord(grid, "XMAS")
-	fmt.Println("the word XMAS has appread around", ans)
+	part1 := searchWord(grid, "XMAS")
+	fmt.Println("the word XMAS has appread around", part1)
+	part2 := crossSearchWord(grid, "MAS")
+	fmt.Println("the word MAS has appread around", part2)
 }
