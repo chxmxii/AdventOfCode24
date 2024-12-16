@@ -9,21 +9,21 @@ import (
 )
 
 var directions = [8][2]int{
-	{-1, 0}, // up
+	{-1, 0},  // up
 	{-1, -1}, // up left
-	{-1, 1}, // up right
-	{1, 1}, // down right
-	{1, 0}, // down
-	{1, -1}, // down left
-	{0, -1}, // left
-	{0, 1}, // right
+	{-1, 1},  // up right
+	{1, 1},   // down right
+	{1, 0},   // down
+	{1, -1},  // down left
+	{0, -1},  // left
+	{0, 1},  // right
 }
 
 var crossDirections = [4][2]int {
 	{-1, -1}, // up left
-	{-1, 1}, // up right
-	{1, 1}, // down right
-	{1, -1}, // down left
+	{-1, 1},  // up right
+	{1, 1},   // down right
+	{1, -1},  // down left
 }
 func getInput(filename string) (string, error) {
 	bytes, err := os.ReadFile(filename)
@@ -97,19 +97,22 @@ func crossSearchWord(grid [][]string, word string) int {
 			if grid[r][c] == string(word[1]) {
 				for _, d := range crossDirections {
 					found := true
-					for i := 0; i < len(word); i++ {
-						nr := r + i*d[0]
-						nc := c + i*d[1]
-						if grid[nr][nc] == ["M","S"] || grid[nr][nc] == ["S","M"] {
-							ans++
-						}
-						// if nr < 0 || nr < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
-						// 	found = false
-						// 	break
+					nr, nc := r, c
+					// nr := r + i*d[0]
+					// nc := c + i*d[1]
+					for i := 1; i < len(word); i++ {
+						nr += d[0]
+						nc += d[1]
+						// if grid[nr][nc] == "M" || grid[nr][nc] == ["S","M"] {
+					// 		ans++
+					// 	}
+						if nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
+							found = false
+							break
 						}
 					}
-					if !found {
-						break
+					if found {
+						ans++
 					}
 				}
 			}
