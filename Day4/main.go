@@ -25,6 +25,7 @@ var crossDirections = [4][2]int {
 	{1, 1},   // down right
 	{1, -1},  // down left
 }
+
 func getInput(filename string) (string, error) {
 	bytes, err := os.ReadFile(filename)
 	if err != nil {
@@ -52,6 +53,26 @@ func createGrid(input string) [][]string {
 	return grid
 }
 
+func searchAllDirections(grid [][]string, word string) int {
+	ans := 0 
+	for _, d := range directions {
+		found := true
+		for i := 1; i < len(word); i++ {
+			nr := r + i*d[0]
+			nc := c + i*d[1]
+
+			if nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
+				found = false
+				break
+			} 	
+		}
+		if found {
+			ans++
+		}
+	}
+	return ans
+}
+
 func searchWord(grid [][]string, word string) int {
 	rows := len(grid)
 	if rows == 0 {
@@ -63,20 +84,7 @@ func searchWord(grid [][]string, word string) int {
 		for c:= 0; c < cols; c++ {
 			// search on all directions
 			if grid[r][c] == string(word[0]) {
-				for _, d := range directions {
-					found := true
-					for i := 1; i < len(word); i++ {
-						nr := r + i*d[0]
-						nc := c + i*d[1]
-
-						if nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
-							found = false
-							break
-						} 	
-					}
-					if found {
-						ans++
-					}
+					searchAllDirections(grid, word)
 				}
 			}
 		}
@@ -84,42 +92,42 @@ func searchWord(grid [][]string, word string) int {
 	return ans
 }
 
-func crossSearchWord(grid [][]string, word string) int {
-	rows := len(grid)
-	if rows == 0 {
-		return 0
-	}
-	cols := len(grid[0])
-	// fmt.Println(cols)
-	ans := 0
-	for r := 0; r < rows; r++ {
-		for c := 0; c < cols; c++ {
-			if grid[r][c] == string(word[1]) {
-				for _, d := range crossDirections {
-					found := true
-					nr, nc := r, c
-					// nr := r + i*d[0]
-					// nc := c + i*d[1]
-					for i := 1; i < len(word); i++ {
-						nr += d[0]
-						nc += d[1]
-						// if grid[nr][nc] == "M" || grid[nr][nc] == ["S","M"] {
-					// 		ans++
-					// 	}
-						if nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
-							found = false
-							break
-						}
-					}
-					if found {
-						ans++
-					}
-				}
-			}
-		}
-	}
-	return ans
-}
+// func crossSearchWord(grid [][]string, word string) int {
+// 	rows := len(grid)
+// 	if rows == 0 {
+// 		return 0
+// 	}
+// 	cols := len(grid[0])
+// 	// fmt.Println(cols)
+// 	ans := 0
+// 	// for r := 0; r < rows; r++ {
+// 	// 	for c := 0; c < cols; c++ {
+// 	// 		if grid[r][c] == string(word[1]) {
+// 	// 			for _, d := range crossDirections {
+// 	// 				found := true
+// 	// 				nr, nc := r, c
+// 	// 				// nr := r + i*d[0]
+// 	// 				// nc := c + i*d[1]
+// 	// 				for i := 1; i < len(word); i++ {
+// 	// 					nr += d[0]
+// 	// 					nc += d[1]
+// 	// 					// if grid[nr][nc] == "M" || grid[nr][nc] == ["S","M"] {
+// 	// 				// 		ans++
+// 	// 				// 	}
+// 	// 					if nr < 0 || nc < 0 || nr >= rows || nc >= cols || grid[nr][nc] != string(word[i]) {
+// 	// 						found = false
+// 	// 						break
+// 	// 					}
+// 	// 				}
+// 	// 				if found {
+// 	// 					ans++
+// 	// 				}
+// 	// 			}
+// 	// 		}
+// 	// 	}
+// 	// }
+// 	return ans
+// }
 
 func handleError(err error) {
 	if err != nil {
