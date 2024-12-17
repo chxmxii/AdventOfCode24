@@ -5,8 +5,13 @@ import (
 	"fmt"
 	"strings"
 	"os"
+	"flag"
 	_ "reflect"
 )
+
+var (
+	filename =  flag.String("f","input.txt","input file")
+) 
 
 func getInput(filename string) (string, error) {
 	bytes, err := os.ReadFile(filename)
@@ -79,8 +84,8 @@ func handleError(err error) {
 }
 
 func main() {
-	filename := "input.txt"
-	data, err := getInput(filename)
+	flag.Parse()
+	data, err := getInput(*filename)
 	handleError(err)
 
 	grid := createGrid(data)
