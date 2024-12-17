@@ -21,9 +21,19 @@ func TestSolve(t *testing.T) {
 			{"M", "S", "A", "M", "X", "M", "S", "M", "S", "A"},
 			{"A", "M", "X", "S", "X", "M", "A", "A", "M", "M"},
 		}
+<<<<<<< HEAD
+		// Check if the createdGrid
+		assert.Equal(t,expectedGrid ,createGrid(gridInput), "failed to create grid" )
+		// find word occurrences
+		// grid := createGrid(data)
+		assert.Equal(t, 18, searchWord(expectedGrid, "XMAS"), "failed to get the correct num of words")
+		assert.Equal(t, 1, searchAllDirections(expectedGrid, "MAS"))
+		// assert.Equal(t, 1, crossSearchWord(expectedGrid, "MAS"), "failed to get the correct num of cross words")
+=======
 		createdGrid := createGrid(gridInput)
 		assert.Equal(t, expectedGrid, createdGrid, "Failed to create grid")
 		grid := createGrid(data) 
 		assert.Equal(t, 18, searchWord(grid, "XMAS"), "Wrong count!!")
+>>>>>>> 2ba2535ea0dc526b8780efcade635738ed08add9
 	})
 }
