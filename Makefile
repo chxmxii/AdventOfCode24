@@ -12,5 +12,5 @@ day3:
 
 .PHONY: day4
 day4:
-	@./Day4/part1/main
-	@./Day4/part2/main
+	@./Day4/part1/main -f Day4/part1/input.txt
+	@./Day4/part2/main -f Day4/part2/input.txt
