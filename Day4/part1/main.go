@@ -57,7 +57,7 @@ func countWord(grid [][]string, word string) int {
 
 	for r := 0; r < rows; r++ {
 		for c := 0; c < cols; c++ {
-			if grid[r][c] == string(word[1]) {
+			if grid[r][c] == string(word[0]) {
 				ans += traverseGrid(grid, word, r, c, rows, cols)
 			}
 		}
@@ -68,7 +68,7 @@ func countWord(grid [][]string, word string) int {
 func traverseGrid(grid [][]string, word string, r, c, rows, cols int) int {
 	count := 0
 	for _, d := range directions {
-		if isFound(grid, word, r, c, rows, cols) {
+		if isFound(grid, word, r, c, d, rows, cols) {
 			count++
 		}
 	}
@@ -99,6 +99,6 @@ func main() {
 	handleError(err)
 
 	grid := createGrid(data)
-	part1 := searchWord(grid, "XMAS")
+	part1 := countWord(grid, "XMAS")
 	fmt.Println("the word XMAS has appread around", part1)
 }

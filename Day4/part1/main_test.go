@@ -23,9 +23,6 @@ func TestSolve(t *testing.T) {
 		}
 	
 		assert.Equal(t,grid ,createGrid(gInput))
-		assert.Equal(t, 18, countWord(grid, "XMAS"))
-		assert.Equal(t, 1, traverseGrid(grid, "MAS")
-		assert.Equal(t, 1, traverseGrid(grid, "MAS"))
-	)
+		assert.Equal(t, 18, countWord(createGrid(data), "XMAS"))
 	})
 }
