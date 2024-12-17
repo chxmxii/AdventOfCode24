@@ -9,3 +9,8 @@ day2:
 .PHONY: day3
 day3:
 	@./Day3/day3
+
+.PHONY: day4
+day4:
+	@./Day4/part1/main
+	@./Day4/part2/main
