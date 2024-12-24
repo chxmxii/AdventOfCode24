@@ -1,4 +1,4 @@
-module chxmxii-aoc4
+module chxmxii-aoc4p2
 
 go 1.23.1
 
