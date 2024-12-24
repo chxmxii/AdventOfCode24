@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"strconv"
@@ -10,6 +11,8 @@ import (
 type Rule struct {
 	r1, r2 int
 }
+
+var filename = flag.String("f", "puzzel.input", "Filename of the input data")
 
 func (r *Rule) rule(str string) {
 	fmt.Sscanf(str, "%d|%d", &r.r1, &r.r2)
@@ -65,10 +68,10 @@ func getMiddle(pages []int) int {
 
 func solve(rules []Rule, updates [][]int) int {
 	count := 0
-	p := p()
-	p.rulesMapping(rules)
+	page := p()
+	page.rulesMapping(rules)
 	for _, update := range updates {
-		if p.checkOrder(update) {
+		if page.checkOrder(update) {
 			count += getMiddle(update)
 		}
 	}
@@ -82,7 +85,8 @@ func handleError(err error) {
 }
 
 func main() {
-	data, err := loadPuzzel("test.input")
+	flag.Parse()
+	data, err := loadPuzzel(*filename)
 	handleError(err)
 	rules, updates, err := parseData(data)
 	handleError(err)
