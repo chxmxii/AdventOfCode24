@@ -14,17 +14,16 @@ func rule(r1, r2 int) Rule {
 	return Rule{r1: r1, r2: r2}
 }
 
-func loadPuzzel(filename string) ([]string, error) {
+func loadPuzzel(filename string) (string, error) {
 	bytes, err := os.ReadFile(filename)
 	if err != nil {
-		return []string{}, err
+		return "", err
 	}
-	data := strings.Split(string(bytes), "\n")
-	return data, nil
+	return string(bytes), nil
 }
 
-func parsePuzzel(input []string) ([]Rule, [][]int) {
-	data := input
+func parsePuzzel(input string) ([]Rule, [][]int) {
+	data := strings.Split(string(input), "\n")
 	updates := make([][]int, 0, len(data))
 	rules := make([]Rule, 0, len(data))
 
@@ -37,11 +36,12 @@ func parsePuzzel(input []string) ([]Rule, [][]int) {
 			continue
 		}
 		switch sec {
+
 		case 0:
 			rule := Rule{}
-			fmt.Sscanf(data[l], "%d|%d", &rule.r1, &rule.r2)
+			fmt.Sscanf(data[l], "%d|%d\n", &rule.r1, &rule.r2)
 			rules = append(rules, rule)
-			break
+
 		case 1:
 			p := strings.Split(data[l], ",")
 			u := make([]int, len(p))
@@ -49,7 +49,6 @@ func parsePuzzel(input []string) ([]Rule, [][]int) {
 				fmt.Sscanf(v, "%d", &u[i])
 			}
 			updates = append(updates, u)
-			break
 		}
 		l++
 	}
@@ -65,6 +64,9 @@ func errHandler(err error) {
 func main() {
 	data, err := loadPuzzel("test.input")
 	errHandler(err)
+	for _, v := range data {
+		fmt.Println(v)
+	}
 	rules, updates := parsePuzzel(data)
 	fmt.Println(rules)
 	fmt.Println(updates)
