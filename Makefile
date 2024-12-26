@@ -21,3 +21,5 @@ day4:
 day5:
 	@echo "Part1;"
 	@./Day4/part1/main -f Day4/part1/puzzel.input
+	@echo "Part1;"
+	@./Day4/part2/main -f Day4/part2/puzzel.input
